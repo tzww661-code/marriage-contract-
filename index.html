@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="locked">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>دعوة زفاف</title>
+<link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fbf8f2;--bg-out:#efe6d8;--ink:#4a3424;--accent:#a5825f;--line:rgba(165,130,95,.35)}
+*{box-sizing:border-box;margin:0;padding:0}
+html.locked,html.locked body{overflow:hidden}
+body{background:var(--bg-out);color:var(--ink);font-family:'El Messiri','Segoe UI',Tahoma,sans-serif;-webkit-tap-highlight-color:transparent}
+#page{position:relative;max-width:520px;margin:0 auto;background:var(--bg);overflow:hidden}
+
+#cover{position:fixed;top:0;bottom:0;left:0;right:0;max-width:520px;margin:0 auto;z-index:50}
+#cover video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+#tap{position:absolute;inset:0;width:100%;height:100%;border:0;background:transparent;cursor:pointer}
+
+#hero{position:relative;height:100vh;height:100svh;min-height:560px}
+#sv{position:absolute;top:0;left:0;width:100%;height:82%;object-fit:cover;object-position:center top;
+  -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 52%,transparent 100%);
+          mask-image:linear-gradient(to bottom,#000 0%,#000 52%,transparent 100%)}
+#hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:60%;pointer-events:none;
+  background:
+   radial-gradient(70% 38% at 14% 62%,rgba(176,141,107,.14),transparent 70%),
+   linear-gradient(to bottom,rgba(251,248,242,0) 0%,rgba(251,248,242,.8) 46%,var(--bg) 82%)}
+/* الكلام في نص الفيديو بالظبط */
+.hero-text{position:absolute;left:0;right:0;top:0;height:82%;z-index:3;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 24px;opacity:0}
+.title{font-weight:400;font-size:22px;color:var(--accent);margin-bottom:14px}
+.rule{width:56px;height:1px;background:var(--accent);opacity:.6;margin:0 auto 18px}
+.names{font-weight:700;font-size:clamp(40px,12vw,58px);line-height:1.35}
+.names i{font-style:normal;font-weight:400;color:var(--accent);margin:0 .35em;font-size:.7em}
+
+.sections{position:relative;padding-bottom:16vh;
+  background:
+   radial-gradient(90% 18% at 0% 30%,rgba(176,141,107,.10),transparent 70%),
+   radial-gradient(90% 18% at 100% 72%,rgba(176,141,107,.10),transparent 70%),
+   var(--bg)}
+.sec{padding:12vh 24px 0;text-align:center}
+.eyebrow{font-size:15px;color:var(--accent);margin-bottom:10px}
+.h{font-weight:700;font-size:30px;margin-bottom:26px}
+.vcard{aspect-ratio:16/9;border-radius:22px;overflow:hidden;border:1px solid var(--line);background:#000;box-shadow:0 18px 40px rgba(74,52,36,.22)}
+.vcard video{width:100%;height:100%;object-fit:cover;display:block}
+.det{border-top:1px solid var(--line)}
+.row{padding:22px 0;border-bottom:1px solid var(--line)}
+.row small{display:block;color:var(--accent);font-size:15px;margin-bottom:6px}
+.row b{font-size:24px;font-weight:600}
+.cd{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.cd div{border:1px solid var(--line);border-radius:14px;padding:16px 4px;background:rgba(255,255,255,.75)}
+.cd b{display:block;font-size:28px;font-weight:700}
+.cd span{font-size:13px;color:var(--accent)}
+.btn{display:inline-block;padding:13px 34px;border-radius:999px;color:#fff;text-decoration:none;font-weight:600;font-size:18px;background:var(--accent)}
+.dua{font-size:22px;line-height:2;color:var(--accent)}
+.reveal{opacity:0}
+
+/* M + خاتم + M */
+.mono{display:flex;align-items:center;justify-content:center;gap:14px;direction:ltr;font-size:54px;font-weight:700;color:var(--accent)}
+.mono img{width:56px;height:56px;object-fit:contain}
+
+/* التايم لاين */
+.tl{position:relative;padding-bottom:8vh}
+.tl-line{position:absolute;top:12vh;bottom:0;left:50%;width:3px;margin-left:-1.5px;border-radius:3px;background:linear-gradient(to bottom,transparent 0,rgba(165,130,95,.28) 6%,rgba(165,130,95,.28) 94%,transparent 100%)}
+.tl-fill{position:absolute;top:0;left:0;width:100%;height:100%;border-radius:3px;background:linear-gradient(to bottom,rgba(165,130,95,0) 0,#c9a27e 8%,#a5825f 100%);box-shadow:0 0 10px rgba(165,130,95,.45);transform:scaleY(0);transform-origin:top}
+.tl-flower{position:absolute;top:-19px;left:50%;margin-left:-19px;width:38px;height:38px;z-index:2;filter:drop-shadow(0 3px 6px rgba(74,52,36,.28))}
+.rw{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:64px}
+.post{position:relative;width:43%;padding:8px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.75)}
+.post img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:10px;display:block;background:linear-gradient(160deg,#efe6d8,#e3d3bd)}
+.tx{width:43%;padding:18px 14px;text-align:center;border-radius:16px;background:rgba(255,255,255,.55);border:1px solid var(--line)}
+.tx small{display:block;color:var(--accent);font-size:15px;margin-bottom:8px}
+.tx p{font-size:17px;line-height:1.9}
+.mono-sec{padding-top:4vh}
+.bride{margin-top:22px;font-size:19px;line-height:2;color:var(--accent)}
+
+#snd{position:fixed;bottom:calc(16px + env(safe-area-inset-bottom,0px));left:max(16px,calc(50% - 244px));z-index:60;width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:rgba(251,248,242,.88);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);color:var(--ink);display:none;align-items:center;justify-content:center;cursor:pointer}
+#snd svg{width:22px;height:22px}
+#snd .off{display:none}
+#snd.muted .on{display:none}
+#snd.muted .off{display:block}
+
+#auto{position:fixed;bottom:calc(16px + env(safe-area-inset-bottom,0px));right:max(16px,calc(50% - 244px));z-index:60;width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:rgba(251,248,242,.88);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);color:var(--ink);display:none;align-items:center;justify-content:center;cursor:pointer}
+#auto svg{width:22px;height:22px}
+#auto .pause{display:none}
+#auto.playing .down{display:none}
+#auto.playing .pause{display:block}
+#auto.playing{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+/* آية */
+.verse-box{padding:38px 22px 30px;border:1px solid var(--line);border-radius:22px;background:rgba(255,255,255,.6);box-shadow:0 12px 30px rgba(74,52,36,.08),inset 0 0 0 6px var(--bg),inset 0 0 0 7px var(--line)}
+.vt{font-size:22px;line-height:2.2;font-weight:600}
+.vs{margin-top:16px;font-size:15px;color:var(--accent)}
+
+/* أزرار */
+.gbtn{display:inline-block;margin-top:30px;padding:14px 34px;border:0;border-radius:999px;font-family:inherit;font-size:18px;font-weight:600;color:#fff;cursor:pointer;background:linear-gradient(135deg,#c9a27e,#a5825f);box-shadow:0 10px 24px rgba(165,130,95,.35)}
+.frow{display:flex;gap:12px}
+.fbtn{flex:1;padding:14px 8px;border:1px solid var(--accent);border-radius:16px;font-family:inherit;font-size:17px;font-weight:600;color:var(--ink);cursor:pointer;background:rgba(255,255,255,.75)}
+
+/* العداد */
+.cbox{padding:22px 16px 20px;border:1px solid var(--line);border-radius:24px;background:rgba(255,255,255,.7);box-shadow:0 14px 34px rgba(74,52,36,.10)}
+.cgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.cgrid div{border:1px solid var(--line);border-radius:14px;padding:14px 2px;background:rgba(251,248,242,.9)}
+.cgrid b{display:block;font-size:26px;font-weight:700}
+.cgrid span{font-size:13px;color:var(--accent)}
+.cwish{margin-top:18px;padding-top:16px;border-top:1px solid var(--line);font-size:17px;line-height:1.95;color:var(--accent)}
+
+/* النوافذ */
+html.modal-open,html.modal-open body{overflow:hidden}
+.md{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(40,28,20,.55);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+.md.on{display:flex}
+.mdbox{position:relative;width:100%;max-width:440px;max-height:86vh;overflow:auto;background:var(--bg);border-radius:24px;padding:44px 26px 32px;text-align:center;box-shadow:inset 0 0 0 6px var(--bg),inset 0 0 0 7px var(--line),0 30px 60px rgba(0,0,0,.35)}
+.mdx{position:absolute;top:14px;left:14px;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer;display:flex;align-items:center;justify-content:center}
+.mdx svg{width:18px;height:18px}
+.mdt{font-size:28px;font-weight:700;margin-bottom:8px}
+.mds{font-size:16px;color:var(--accent);margin-bottom:18px}
+.tw{position:relative;font-size:18px;line-height:2.1;margin-top:14px}
+.tw p{white-space:pre-line}
+.tw .ghost{visibility:hidden}
+.tw .live{position:absolute;top:0;left:0;right:0}
+.live.typing::after{content:"";display:inline-block;width:2px;height:1em;margin-inline-start:3px;vertical-align:middle;background:var(--accent);animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.fl{border-top:1px solid var(--line)}
+.fr{padding:18px 0;border-bottom:1px solid var(--line)}
+.fr small{display:block;color:var(--accent);font-size:15px;margin-bottom:4px}
+.fr b{font-size:22px;font-weight:600}
+
+/* الفوتر */
+.socrow{display:flex;align-items:center;gap:14px}
+.socrow::before,.socrow::after{content:"";flex:1;height:1px;background:var(--line)}
+.soc{display:flex;gap:10px}
+.soc a{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--accent);display:flex;align-items:center;justify-content:center}
+.soc svg{width:19px;height:19px}
+.dev{margin-top:20px;font-size:14px;color:var(--accent)}
+.dev a{color:var(--ink);text-decoration:none;font-weight:600}
+
+/* الخريطة */
+.mapbox{padding:10px;border:1px solid var(--line);border-radius:26px;background:rgba(255,255,255,.7);box-shadow:0 14px 34px rgba(74,52,36,.12)}
+.mapfr{position:relative;border-radius:18px;overflow:hidden;aspect-ratio:4/3;border:1px solid var(--line);background:#efe6d8}
+.mapfr iframe{width:100%;height:100%;border:0;display:block;pointer-events:none;filter:sepia(.25) saturate(.85) contrast(.95)}
+.mapcap{padding:14px 6px 4px;font-size:19px;font-weight:600}
+.mbtn{display:block;margin-top:12px;padding:14px 10px;border-radius:16px;text-align:center;text-decoration:none;font-size:18px;font-weight:600;color:#fff;background:linear-gradient(135deg,#c9a27e,#a5825f);box-shadow:0 10px 24px rgba(165,130,95,.3)}
+.fbtn.wide{display:block;width:100%;margin-top:16px}
+.sig{margin-top:24px;font-size:18px;line-height:2;color:var(--accent)}
+</style>
+</head>
+<body>
+<div id="page">
+
+  <section id="hero">
+    <video id="sv" src="scene.mp4" playsinline webkit-playsinline preload="auto" muted loop></video>
+    <div class="hero-text"><div class="ht">
+      <p class="title">دعوة زفاف</p>
+      <div class="rule"></div>
+      <h1 class="names">محمود<i>&amp;</i>منه</h1>
+    </div></div>
+  </section>
+
+  <div class="sections">
+    <section class="sec">
+      <div class="vcard reveal"><video id="clip" src="clip.mp4" playsinline webkit-playsinline preload="metadata" loop></video></div>
+    </section>
+
+    <section class="sec mono-sec">
+      <div class="mono reveal"><span>M</span><img src="ring.png" alt=""><span>M</span></div>
+      <p class="bride reveal">إلى من اختارها قلبي قبل عيني،<br>عروستي الغالية… بكِ يكتمل الفرح</p>
+    </section>
+
+    <section class="sec tl">
+      <div class="tl-line">
+        <i class="tl-fill"></i>
+        <svg class="tl-flower" viewBox="0 0 32 32">
+          <g fill="#c9a27e" opacity=".9">
+            <circle cx="16" cy="7" r="6"/><circle cx="25" cy="14" r="6"/>
+            <circle cx="21" cy="25" r="6"/><circle cx="11" cy="25" r="6"/><circle cx="7" cy="14" r="6"/>
+          </g>
+          <circle cx="16" cy="16" r="4" fill="#a5825f"/>
+        </svg>
+      </div>
+      <div class="rw">
+        <div class="post reveal"><img src="p1.jpg" alt=""></div>
+        <div class="tx reveal"><small>حبيبتي</small><p>أنتِ الحكاية اللي كنت بدوّر عليها، ومعاكِ عرفت إن للفرح اسم.</p></div>
+      </div>
+      <div class="rw">
+        <div class="tx reveal"><small>أمان قلبي</small><p>في عينيكِ بيتي، وفي ضحكتك كل الدنيا بتهدى.</p></div>
+        <div class="post reveal"><img src="p2.jpg" alt=""></div>
+      </div>
+      <div class="rw">
+        <div class="post reveal"><img src="p3.jpg" alt=""></div>
+        <div class="tx reveal"><small>نصي التاني</small><p>معاكِ بكمّل، ومعاكِ بحلم، وبكِ أبدأ عمري الجديد.</p></div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="verse-box verse reveal">
+        <p class="vt">﴿ وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ۚ إِنَّ فِي ذَٰلِكَ لَآيَاتٍ لِّقَوْمٍ يَتَفَكَّرُونَ ﴾</p>
+        <p class="vs">صدق الله العظيم · سورة الروم – ٢١</p>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="mono reveal"><span>M</span><img src="ring.png" alt=""><span>M</span></div>
+      <button class="gbtn reveal" data-open="m-msg">رسالة إلى المعازيم</button>
+    </section>
+
+    <section class="sec">
+      <p class="eyebrow reveal">باقي على الفرح</p>
+      <div class="cbox reveal">
+        <div class="cgrid">
+          <div><b id="c-mo">٠</b><span>شهور</span></div>
+          <div><b id="c-w">٠</b><span>أسابيع</span></div>
+          <div><b id="c-d">٠</b><span>أيام</span></div>
+          <div><b id="c-h">٠</b><span>ساعات</span></div>
+          <div><b id="c-m">٠</b><span>دقائق</span></div>
+          <div><b id="c-s">٠</b><span>ثواني</span></div>
+        </div>
+        <p class="cwish">اللهم بارك لمحمود ومنه، واجعل بينهما مودة ورحمة،<br>وأسعد قلبيهما وتمّم فرحتهما</p>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="frow reveal">
+        <button class="fbtn" data-open="m-groom">أهل العريس</button>
+        <button class="fbtn" data-open="m-bride">أهل العروسة</button>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="mapbox reveal">
+        <div class="mapfr"><iframe title="خريطة القاعة" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=%D9%82%D8%A7%D8%B9%D8%A9%20%D8%A7%D9%84%D9%85%D8%A7%D8%B3%D8%A9%20%D8%A7%D9%84%D9%82%D8%A7%D9%87%D8%B1%D8%A9&output=embed"></iframe></div>
+        <p class="mapcap">قاعة الماسة – القاهرة</p>
+        <a class="mbtn" href="https://www.google.com/maps/search/?api=1&query=%D9%82%D8%A7%D8%B9%D8%A9%20%D8%A7%D9%84%D9%85%D8%A7%D8%B3%D8%A9%20%D8%A7%D9%84%D9%82%D8%A7%D9%87%D8%B1%D8%A9" target="_blank" rel="noopener">استكشف المكان</a>
+      </div>
+      <button class="fbtn wide reveal" data-open="m-lunch">الغداء</button>
+    </section>
+    <section class="sec">
+      <div class="socrow reveal">
+        <div class="soc">
+          <a href="https://facebook.com/" target="_blank" rel="noopener" aria-label="فيسبوك"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 8h2.5V4.5H14A3.5 3.5 0 0 0 10.5 8v2H8v3.5h2.5V21H14v-7.5h2.5L17 10h-3V8z"/></svg></a>
+          <a href="https://instagram.com/" target="_blank" rel="noopener" aria-label="انستجرام"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6" fill="currentColor"/></svg></a>
+          <a href="https://wa.me/" target="_blank" rel="noopener" aria-label="واتساب"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l1.65-4.9A9 9 0 1 1 8 19.4L3 21z"/><path d="M9 8.5c0 3.5 3 6.5 6.5 6.5l1-1.5-2-1-1 .8c-1-.5-2-1.5-2.5-2.5l.8-1-1-2z"/></svg></a>
+          <a href="https://tiktok.com/" target="_blank" rel="noopener" aria-label="تيك توك"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 3c.3 2.5 2 4.2 5 4.5"/></svg></a>
+        </div>
+      </div>
+      <p class="dev reveal">تم تطويره بواسطة <a href="https://facebook.com/" target="_blank" rel="noopener">@ياسر أيمن</a></p>
+    </section>
+  </div>
+</div>
+
+<div id="cover">
+  <video id="cv" src="mm.mp4" poster="poster.png" playsinline webkit-playsinline preload="auto" muted></video>
+  <button id="tap" aria-label="افتح الدعوة"></button>
+</div>
+
+<button id="snd" aria-label="الصوت">
+  <svg class="on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4V5z" fill="currentColor"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>
+  <svg class="off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4V5z" fill="currentColor"/><path d="m16 9 5 6M21 9l-5 6"/></svg>
+</button>
+
+<button id="auto" aria-label="سكرول تلقائي">
+  <svg class="down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m6 13 6 6 6-6"/></svg>
+  <svg class="pause" viewBox="0 0 24 24" fill="currentColor"><rect x="7" y="5" width="3.5" height="14" rx="1"/><rect x="13.5" y="5" width="3.5" height="14" rx="1"/></svg>
+</button>
+
+<div class="md" id="m-msg"><div class="mdbox">
+    <button class="mdx" aria-label="إغلاق"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    <h3 class="mdt">رسالة إلى المعازيم</h3>
+    <div class="tw"><p class="ghost" id="ghost"></p><p class="live" id="live"></p></div>
+  </div></div>
+  <div class="md" id="m-groom"><div class="mdbox">
+    <button class="mdx" aria-label="إغلاق"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    <h3 class="mdt stag">أهل العريس</h3>
+    <p class="mds stag">من عائلة <b>اسم العائلة</b></p>
+    <div class="fl"><div class="fr stag"><small>الدكتور</small><b>الاسم هنا</b></div><div class="fr stag"><small>الحاج</small><b>الاسم هنا</b></div><div class="fr stag"><small>المهندس</small><b>الاسم هنا</b></div><div class="fr stag"><small>الأستاذ</small><b>الاسم هنا</b></div></div>
+  </div></div>
+  <div class="md" id="m-bride"><div class="mdbox">
+    <button class="mdx" aria-label="إغلاق"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    <h3 class="mdt stag">أهل العروسة</h3>
+    <p class="mds stag">من عائلة <b>اسم العائلة</b></p>
+    <div class="fl"><div class="fr stag"><small>الدكتور</small><b>الاسم هنا</b></div><div class="fr stag"><small>الحاج</small><b>الاسم هنا</b></div><div class="fr stag"><small>المهندس</small><b>الاسم هنا</b></div><div class="fr stag"><small>الأستاذ</small><b>الاسم هنا</b></div></div>
+  </div></div>
+
+<div class="md" id="m-lunch"><div class="mdbox">
+    <button class="mdx" aria-label="إغلاق"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    <h3 class="mdt stag">الغداء</h3>
+    <p class="mds stag">دعوة غداء لأحبتنا المعازيم</p>
+    <div class="fl">
+      <div class="fr stag"><small>التاريخ</small><b>السبت ١٠ أكتوبر ٢٠٢٦</b></div>
+      <div class="fr stag"><small>الساعة</small><b>٢:٠٠ ظهراً</b></div>
+      <div class="fr stag"><small>المكان</small><b>عند العريس فقط</b></div>
+    </div>
+    <p class="sig stag">العريس والعروسة<br>محمود &amp; منه</p>
+  </div></div>
+  <audio id="music" src="me.mp3" loop preload="auto"></audio>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+var $=function(id){return document.getElementById(id)};
+var cv=$('cv'),sv=$('sv'),clip=$('clip'),music=$('music'),cover=$('cover'),tap=$('tap'),snd=$('snd');
+var opened=false,revealed=false,soundOn=true,clipActive=false,verseActive=false,musicRunning=false;
+
+function musicStart(){
+  if(musicRunning)return; musicRunning=true;
+  music.volume=0; music.play().catch(function(){});
+  gsap.to(music,{volume:.7,duration:1,overwrite:true});
+}
+function musicStop(){
+  if(!musicRunning)return; musicRunning=false;
+  gsap.to(music,{volume:0,duration:.6,overwrite:true,onComplete:function(){if(!musicRunning)music.pause()}});
+}
+function sync(){
+  if(!opened)return;
+  clip.muted=!soundOn;
+  if(clipActive){clip.play().catch(function(){clip.muted=true;clip.play()})}else{clip.pause()}
+  if(soundOn&&!clipActive&&!verseActive)musicStart();else musicStop();
+}
+snd.addEventListener('click',function(){
+  soundOn=!soundOn;
+  snd.classList.toggle('muted',!soundOn);
+  sync();
+});
+
+tap.addEventListener('click',function(){
+  if(opened)return; opened=true; tap.disabled=true;
+  clip.volume=0; clip.muted=false;
+  clip.play().then(function(){clip.pause();clip.currentTime=0;clip.volume=1}).catch(function(){clip.volume=1});
+  cv.play().catch(reveal);
+  sync();
+});
+cv.addEventListener('timeupdate',function(){if(cv.duration&&cv.currentTime>cv.duration-1)reveal()});
+cv.addEventListener('ended',reveal);
+
+function reveal(){
+  if(revealed)return; revealed=true;
+  sv.play().catch(function(){});
+  gsap.to(cover,{opacity:0,duration:1.4,ease:'power1.inOut',onComplete:function(){cover.style.display='none';cv.pause()}});
+  document.documentElement.classList.remove('locked');
+  snd.style.display='flex';
+  autoBtn.style.display='flex';
+  gsap.from(autoBtn,{opacity:0,scale:.6,duration:.8,delay:1,ease:'back.out(2)'});
+  gsap.from(snd,{opacity:0,scale:.6,duration:.8,delay:1,ease:'back.out(2)'});
+  gsap.fromTo('.hero-text',{opacity:0,y:24},{opacity:1,y:0,duration:1.8,delay:2,ease:'power2.out'});
+  ScrollTrigger.refresh();
+}
+
+gsap.set('.reveal',{y:40,opacity:0});
+var show=function(els){gsap.to(els,{opacity:1,y:0,duration:1.1,ease:'power3.out',stagger:.12,overwrite:true})};
+ScrollTrigger.batch('.reveal',{
+  start:'top 90%',end:'bottom 10%',
+  onEnter:show,onEnterBack:show,
+  onLeave:function(els){gsap.to(els,{opacity:0,y:-40,duration:.6,overwrite:true})},
+  onLeaveBack:function(els){gsap.to(els,{opacity:0,y:40,duration:.6,overwrite:true})}
+});
+
+gsap.to('.ht',{opacity:0,y:-70,ease:'none',
+  scrollTrigger:{trigger:'#hero',start:'top top',end:'55% top',scrub:true}});
+
+ScrollTrigger.create({trigger:'.vcard',start:'top 65%',end:'bottom 35%',
+  onToggle:function(self){clipActive=self.isActive;sync()}});
+
+/* الوردة تنزل على الخط مع السكرول */
+var lineH=function(){return document.querySelector('.tl-line').offsetHeight};
+gsap.to('.tl-flower',{y:function(){return lineH()},rotation:200,transformOrigin:'50% 50%',ease:'none',
+  scrollTrigger:{trigger:'.tl',start:'top 60%',end:'bottom 75%',scrub:true,invalidateOnRefresh:true}});
+gsap.to('.tl-fill',{scaleY:1,ease:'none',
+  scrollTrigger:{trigger:'.tl',start:'top 60%',end:'bottom 75%',scrub:true}});
+
+var autoBtn=$('auto'),autoOn=false,apos=0,alast=0,ASPEED=40; // السرعة بالبكسل/ثانية
+function autoLoop(t){
+  if(!autoOn)return;
+  var dt=Math.min(t-alast,50)/1000; alast=t;
+  apos+=ASPEED*dt;
+  window.scrollTo(0,apos);
+  if(apos>=document.documentElement.scrollHeight-innerHeight-2){autoStop();return}
+  requestAnimationFrame(autoLoop);
+}
+function autoStart(){
+  if(window.scrollY>=document.documentElement.scrollHeight-innerHeight-2)window.scrollTo(0,0);
+  autoOn=true; apos=window.scrollY; alast=performance.now();
+  autoBtn.classList.add('playing'); requestAnimationFrame(autoLoop);
+}
+function autoStop(){autoOn=false; autoBtn.classList.remove('playing')}
+autoBtn.addEventListener('click',function(){autoOn?autoStop():autoStart()});
+['touchstart','wheel','keydown'].forEach(function(ev){
+  window.addEventListener(ev,function(e){
+    if(autoOn&&!(e.target.closest&&e.target.closest('#auto,#snd')))autoStop();
+  },{passive:true});
+});
+
+/* الأغاني تقف لما توصل للآية وترجع لما تبعد */
+ScrollTrigger.create({trigger:'.verse',start:'top 70%',end:'bottom 30%',
+  onToggle:function(self){verseActive=self.isActive;sync()}});
+
+/* ---------- النوافذ ---------- */
+var TXT='أحبتنا وأهلنا الكرام،\nالسلام عليكم ورحمة الله وبركاته\n\nيسعدنا أن نشارككم أجمل أيام عمرنا، ويشرّفنا حضوركم ودعواتكم في يوم زفافنا.\nوجودكم بيننا أجمل هدية، وفرحتنا لا تكتمل إلا بكم.\n\nنسأل الله أن يجمعنا بكم دائماً على الخير والمحبة.\n\nمحمود & منه';
+var ghost=$('ghost'),live=$('live'),tI=null;
+ghost.textContent=TXT;
+function typeStop(){if(tI){clearInterval(tI);tI=null}live.classList.remove('typing')}
+function typeStart(){
+  typeStop(); live.textContent=''; live.classList.add('typing');
+  var i=0; tI=setInterval(function(){i++;live.textContent=TXT.slice(0,i);if(i>=TXT.length)typeStop()},38);
+}
+function openMd(id){
+  var m=$(id); if(!m)return; autoStop();
+  document.documentElement.classList.add('modal-open'); m.classList.add('on');
+  gsap.fromTo(m,{opacity:0},{opacity:1,duration:.3,overwrite:true});
+  gsap.fromTo(m.querySelector('.mdbox'),{y:30,scale:.94},{y:0,scale:1,duration:.55,ease:'power3.out',overwrite:true});
+  var st=m.querySelectorAll('.stag');
+  if(st.length)gsap.fromTo(st,{opacity:0,y:14},{opacity:1,y:0,duration:.6,stagger:.1,delay:.25,ease:'power2.out',overwrite:true});
+  if(id==='m-msg')typeStart();
+}
+function closeMd(m){
+  typeStop();
+  gsap.to(m,{opacity:0,duration:.25,overwrite:true,onComplete:function(){m.classList.remove('on');document.documentElement.classList.remove('modal-open')}});
+}
+Array.prototype.forEach.call(document.querySelectorAll('[data-open]'),function(b){
+  b.addEventListener('click',function(){openMd(b.getAttribute('data-open'))});
+});
+Array.prototype.forEach.call(document.querySelectorAll('.md'),function(m){
+  m.addEventListener('click',function(e){if(e.target===m)closeMd(m)});
+  m.querySelector('.mdx').addEventListener('click',function(){closeMd(m)});
+});
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){var o=document.querySelector('.md.on');if(o)closeMd(o)}
+});
+
+/* ---------- العداد: شهور / أسابيع / أيام / ساعات / دقائق / ثواني ---------- */
+var target=new Date(2026,9,10,19,0,0);
+function put(id,n){$(id).textContent=n.toLocaleString('ar-EG')}
+function addM(d,n){
+  var x=new Date(d.getTime()),day=x.getDate();
+  x.setDate(1);x.setMonth(x.getMonth()+n);
+  x.setDate(Math.min(day,new Date(x.getFullYear(),x.getMonth()+1,0).getDate()));
+  return x;
+}
+function tick(){
+  var now=new Date(),mo=0,ms=0;
+  if(now<target){
+    mo=(target.getFullYear()-now.getFullYear())*12+target.getMonth()-now.getMonth();
+    if(mo<0)mo=0;
+    var a=addM(now,mo);
+    while(a>target&&mo>0){mo--;a=addM(now,mo)}
+    ms=Math.max(0,target-a);
+  }
+  var d=Math.floor(ms/864e5),r=ms%864e5;
+  put('c-mo',mo);put('c-w',Math.floor(d/7));put('c-d',d%7);
+  put('c-h',Math.floor(r/36e5));put('c-m',Math.floor(r%36e5/6e4));put('c-s',Math.floor(r%6e4/1000));
+}
+tick();setInterval(tick,1000);
+</script>
+</body>
+</html>
